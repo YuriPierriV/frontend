@@ -1,0 +1,38 @@
+
+<app-header id="header"></app-header>
+<app-main-image></app-main-image>
+<section class=" pt-5 pb-5 perfis" id="perfis">
+    <div class="container  pt-2 mb-5 ">
+        <div class="row d-flex justify-content-center text-center">
+            <div class="col-md-3">
+                <app-card imagem="/assets/aluno.jpg" title="Aluno" text="Acompanhe suas notas"></app-card>
+            </div>
+            <div class="col-md-3">
+                <app-card imagem="/assets/professor.jpg" title="Professor" text="Monitore seus alunos"></app-card>
+            </div>
+            <div class="col-md-3">
+                <app-card imagem="/assets/escola.jpg" title="Instituição" text="Gerenciamento completo"></app-card>
+            </div>
+            <div class="col-md-3" id="text">
+                <div class="image-container h-100">
+                    <div class="card card-clean">
+                        <div class="container px-4 py-4 text-start">
+                            <h2 class="card-title mb-3">
+                                <span class="w-200">Organize</span><br> Seus objetivos
+                            </h2>
+                            <p class="texto-card mb-3">
+                                Tenha controle total sobre suas atividades, desempenho e recomendações diretamente na palma da sua mão.
+                            </p>
+                            <button class="btn btn-primary flat"  [routerLink]="['/comecar']"  >Comece Agora</button>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<app-main-image></app-main-image>

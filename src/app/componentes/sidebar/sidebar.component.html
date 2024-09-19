@@ -1,0 +1,142 @@
+<div class="wrapper">
+    <aside id="sidebar" [ngClass]="collapsed ? 'collapsed' : 'show'">
+        <div class="h-100 d-flex flex-column">
+            <div>
+                <div class="sidebar-logo justify-content-center d-flex">
+                    <a [routerLink]="['/']" ><img src="assets/logo.png" alt="" class="img-fluid" height="50" width="150"></a>
+                </div>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">Ferramentas</li>
+                    <li class="sidebar-item">
+                        <a routerLink="/home" class="sidebar-link d-flex align-items-center">
+                            <i class="bi bi-house pe-3 icon"></i>
+                            <div class="text">Home</div>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a routerLink="/dashboard" class="sidebar-link d-flex align-items-center">
+                            <i class="bi bi-graph-up-arrow pe-3 icon"></i>
+                            <div class="text">Dashboard</div>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a  class="sidebar-link collapsed d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#pages"
+                            aria-expanded="false" aria-controls="pages">
+                            <i class="bi bi-clipboard-check pe-3 icon"></i>
+                            <div class="text">Formulários</div>
+                        </a>
+                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse mx-2" data-bs-parent="#sidebar">
+                            <li class="sidebar-item"><a  class="sidebar-link">Criar Novo</a></li>
+                            <li class="sidebar-item"><a  class="sidebar-link">Meus Formulários</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a  class="sidebar-link collapsed d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#dashboard"
+                            aria-expanded="false" aria-controls="dashboard">
+                            <i class="bi bi-people pe-3 icon"></i>
+                            <div class="text">Turma</div>
+                        </a>
+                        <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse mx-2" data-bs-parent="#sidebar">
+                            <li class="sidebar-item"><a  class="sidebar-link">Criar Nova</a></li>
+                            <li class="sidebar-item"><a  class="sidebar-link">Minhas Turmas</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-header">Análise</li>
+                    <li class="sidebar-item">
+                        <a  class="sidebar-link d-flex align-items-center">
+                            <i class="bi bi-house pe-3 icon"></i>
+                            <div class="text">Home</div>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a  class="sidebar-link d-flex align-items-center">
+                            <i class="bi bi-graph-up-arrow pe-3 icon"></i>
+                            <div class="text">Dashboard</div>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a  class="sidebar-link collapsed d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#pages"
+                            aria-expanded="false" aria-controls="pages">
+                            <i class="bi bi-clipboard-check pe-3 icon"></i>
+                            <div class="text">Formulários</div>
+                        </a>
+                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse mx-2" data-bs-parent="#sidebar">
+                            <li class="sidebar-item"><a  class="sidebar-link">Criar Novo</a></li>
+                            <li class="sidebar-item"><a  class="sidebar-link">Meus Formulários</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a  class="sidebar-link collapsed d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#dashboard"
+                            aria-expanded="false" aria-controls="dashboard">
+                            <i class="bi bi-people pe-3 icon"></i>
+                            <div class="text">Turma</div>
+                        </a>
+                        <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse mx-2" data-bs-parent="#sidebar">
+                            <li class="sidebar-item"><a  class="sidebar-link">Criar Nova</a></li>
+                            <li class="sidebar-item"><a  class="sidebar-link">Minhas Turmas</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-auto">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a  class="sidebar-link d-flex align-items-center">
+                            <i class="bi bi-gear icon pe-3"></i>
+                            <div class="text">Configurações</div>
+                        </a>
+                    </li>
+                    <hr class="w-100 m-auto">
+                    <li class="sidebar-item m-3">
+                        <div class="row w-100 align-items-center">
+                            <div class="col-3 sidebar-link text-center pe-0">
+                                <img src="{{user?.img_link}}" class="img-fluid rounded-circle perfil" alt="">
+                            </div>
+                            <div class="col-7 d-flex flex-column justify-content-center p-0">
+                                <h6 class="m-0 text">{{user?.nome}} {{user?.sobrenome}}</h6>
+                                <p class="email m-0">{{user?.email}}</p>
+                            </div>
+                            <div class="col-2 text-center p-0">
+                                <a class="sidebar-link" (click)="sair()">
+                                    <i class="bi bi-box-arrow-right vermelho icon"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Component -->
+    <div class="main" [ngClass]="collapsed ? 'sidebar-collapsed' : ''">
+        <div class="container-fluid w-100 p-0" id="upbar">
+            <div class="row justify-content-start w-100">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-md-6 justify-content-start">
+                            <nav class="navbar navbar-expand px-3">
+                                <button class="btn btn-clean" (click)="toggleSidebar()">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                            </nav>
+                        </div>
+                        <div class="col-md-6 justify-content-end d-none d-md-inline-block">
+                            <nav class="navbar navbar-expand px-3 justify-content-end">
+                                <button class="btn btn-clean" (click)="toggleSidebar()">
+                                    Search??
+                                </button>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <main class="content p-5">
+            <div class="container">
+                <div class="mb-3">
+                    <ng-content select="[selector]"></ng-content>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

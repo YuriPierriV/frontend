@@ -1,0 +1,121 @@
+<app-forms-layout-inverse>
+    <div col-left class="esquerda rounded-start-2">
+      <div class="container justify-content-center d-flex align-items-center h-100">
+        <img class="img-responsive-esquerda img-fluid" src="/assets/online.png" alt="">
+      </div>
+    </div>
+  
+    <div col-right class="m-4 mx-5 px-5 principal">
+      <div class="mb-5 mt-4">
+        <a href="/" [routerLink]="['']" class="d-flex justify-content-start">
+          <img src="/assets/logo.png" alt="">
+        </a>
+      </div>
+      <div class="container">
+        <h6 class="h5 mb-0 mt-3 text">Criar conta</h6>
+        <p class="text-muted mt-1 mb-4 text">Mais algumas informações para finalizar seu cadastro.</p>
+        <form [formGroup]="form" (ngSubmit)="salvarContato()">
+          <div class="container">
+            <div class="row g-3 pb-2">
+              <div class="col-md-6">
+                <label for="exampleInputName1" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="exampleInputName1" formControlName="nome">
+                <app-msg-erro [control]="obterControle('nome')"></app-msg-erro>
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputName2" class="form-label">Sobrenome</label>
+                <input type="text" class="form-control" id="exampleInputName2" formControlName="sobrenome">
+                <app-msg-erro [control]="obterControle('sobrenome')"></app-msg-erro>
+              </div>
+            </div>
+            <div class="row g-3 pb-2">
+              <div class="col-md-6">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email">
+                <app-msg-erro [control]="obterControle('email')"></app-msg-erro>
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputFone1" class="form-label">Telefone</label>
+                <input type="phone" mask="(00) 00000-0009" class="form-control" id="exampleInputFone1" formControlName="telefone">
+                <app-msg-erro [control]="obterControle('telefone')"></app-msg-erro>
+              </div>
+            </div>
+            <div class="row g-3 pb-2">
+              <div class="col-md-12">
+                <label for="exampleInputSenha1" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="exampleInputSenha1" formControlName="senha">
+                <app-msg-erro [control]="obterControle('senha')"></app-msg-erro>
+              </div>
+            </div>
+            <hr class="w-75 m-auto my-3">
+            <div class="row g-3 pb-2">
+              <div class="col-md-6">
+                <label for="exampleInputGenero1" class="form-label">Gênero</label>
+                <select class="form-select" id="exampleInputGenero1" formControlName="genero">
+                  <option value="1">Masculino</option>
+                  <option value="2">Feminino</option>
+                  <option value="3">Outro</option>
+                </select>
+                <app-msg-erro [control]="obterControle('genero')"></app-msg-erro>
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputData1" class="form-label">Data de nascimento</label>
+                <input type="date" class="form-control" id="exampleInputData1" formControlName="nasc">
+                <app-msg-erro [control]="obterControle('nasc')"></app-msg-erro>
+              </div>
+            </div>
+            <div class="row g-3 mt-3">
+              <div class="container d-flex justify-content-center">
+                <span class="form-label">Tipo de conta</span>
+              </div>
+              <div class="container mb-3 align-middle">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-check d-flex aluno-mark text-center p-0 align-items-center justify-content-center">
+                      <label class="form-check-label teste p-3 d-flex flex-column align-items-center justify-content-center" for="flexRadioDefault1">
+                        <img src="/assets/aluno-icon.png" alt="Aluno" class="img-fluid img-responsive">
+                        <span class="d-flex justify-content-center text">Aluno</span>
+                        <input class="form-check-input aluno_input" type="radio" hidden name="tipo" id="flexRadioDefault1" formControlName="tipo" value="aluno">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check d-flex aluno-mark text-center p-0 align-items-center justify-content-center">
+                      <label class="form-check-label teste p-3 d-flex flex-column align-items-center justify-content-center" for="flexRadioDefault2">
+                        <img src="/assets/professor.png" alt="Professor" class="img-fluid img-responsive">
+                        <span class="text">Professor</span>
+                        <input class="form-check-input aluno_input" type="radio" hidden name="tipo" id="flexRadioDefault2" formControlName="tipo" value="professor">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check d-flex aluno-mark text-center p-0 align-items-center justify-content-center">
+                      <label class="form-check-label teste p-3 d-flex flex-column align-items-center justify-content-center" for="flexRadioDefault3">
+                        <img src="/assets/escola.png" alt="Instituição" class="img-fluid img-responsive">
+                        <span class="d-flex justify-content-center text">Instituição</span>
+                        <input class="form-check-input aluno_input" type="radio" hidden name="tipo" id="flexRadioDefault3" formControlName="tipo" value="instituicao">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <app-msg-erro [control]="obterControle('tipo')"></app-msg-erro>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-end mt-3">
+            <div aviso class="col-md-6 align-items-center d-flex some">
+              <p class="text-muted p-0 m-0">Já tem uma conta? <a href="" class="text-primary fw-semibold">Login</a></p>
+            </div>
+            <div class="col-md-6">
+              <button
+                [disabled]="form.invalid"
+                [ngClass]="form.valid ? 'botao-salvar' : 'botao-desabilitado'"
+                type="submit" class="btn btn-outline-primary w-100">Cadastrar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </app-forms-layout-inverse>
+  

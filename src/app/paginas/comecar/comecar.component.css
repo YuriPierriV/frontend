@@ -1,0 +1,40 @@
+
+
+body{
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.text{
+    font-size: 1rem;
+}
+
+.form-label{
+    font-size: 0.85rem;
+}
+
+.google{
+    min-width: 100%;
+}
+
+.btn-carrosel{
+    background-color: #1557da;
+}
+
+.card-img{
+    height: 35vh;
+    width: 50vh;
+}
+
+.card-body h4{
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #343a40;
+}
+
+.card-body p{
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #8a90a2;
+}

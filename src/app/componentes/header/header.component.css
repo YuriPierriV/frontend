@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+
+.navbar{
+    min-height: 70px;
+    height: fit-content;
+}
+
+.navbar-toggler{
+    border: none;
+}
+
+.navbar-toggler:focus{
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.show{
+    padding: 0 50px;
+}
+
+.nav-link{
+    color: var(--text);
+    font-size: 1.02rem !important;
+    font-weight: 400 !important;
+}
+
+
+
+.btn-outline-primary{
+    color: var(--primary);
+    font-weight: 400 !important;
+    font-size: 0.9rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.btn-outline-primary:hover{
+    color: #fbf2f2;
+    box-shadow: 0 8px 20px -6px var(--primary) ;
+}
+
+.active{
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+.dropdown-menu:hover {
+    display: block;
+}
+  
+.dropdown-menu{
+    border: none !important;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.desempenho{
+    min-width: 500px;
+}
+.nav-title {
+    margin-bottom: 10px;
+    display: block;
+  }
+
+.icon{
+    
+    font-size: 18px !important;
+    border-radius: 5px;
+    padding: 5px 7px;
+    
+}
+
+.vermelho {
+    background-color: rgba(255, 209, 209, 0.4);
+    color: #B22222;
+}
+
+.azul {
+    background-color: rgba(209, 231, 255, 0.4);
+    color: #1E90FF;
+}
+
+.amarelo {
+    background-color: rgba(255, 248, 220, 0.4);
+    color: #FFD700;
+}
+
+.laranja {
+    background-color: rgba(255, 229, 180, 0.4);
+    color: #FF8C00;
+}
+
+.cinza {
+    background-color: rgba(240, 240, 240, 0.4);
+    color: #696969;
+}
+
+.verde {
+    background-color: rgba(209, 255, 209, 0.4);
+    color: #32CD32;
+}
+
+.roxo {
+    background-color: rgba(230, 230, 250, 0.4);
+    color: #6A5ACD;
+}
+
+.marrom {
+    background-color: rgba(245, 222, 179, 0.4);
+    color: #8B4513;
+}
+
+
+
+
+.dropdown-item{
+    font-weight: 300 !important;
+
+}
+
+.dropdown-item:hover{
+    background-color: #fff !important;
+}
+

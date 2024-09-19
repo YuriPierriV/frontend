@@ -1,0 +1,64 @@
+
+
+.card-clean{
+    
+    border-radius: 0;
+    min-height: 100%;
+    border: 20px solid #f5f6f8;
+    background-color: transparent;
+}
+
+.perfis {
+    background-image: radial-gradient(circle, #0000001f 1px, #fff 1px);
+    background-size: 20px 20px;
+    height: 600px;
+    min-height: 600px;
+    max-height: 600px;
+    position: relative; /* Necessário para o overlay */
+}
+
+.perfis::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1); /* Overlay preto com 50% de opacidade */
+}
+
+#header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.card-title{
+    font-family: "Roboto Serif", serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.w-200{
+    font-size: 1.5rem;
+    font-weight: 100 !important;
+    line-height: 40px;
+}
+
+.texto-card{
+    font-weight: 400;
+    font-family: "Poppins", sans-serif;
+    color: #4a4a4a;
+    font-size: 0.9rem;
+}
+
+#text{
+    height: 400px;
+    max-height: 400px;
+}
+
+.flat{
+    border-radius: 0;
+    box-shadow: 0 8px 20px -6px var(--primary) ;
+}

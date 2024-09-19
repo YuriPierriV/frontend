@@ -1,0 +1,27 @@
+@if (control.errors && control.touched) {
+    @if(control.errors['required']){
+        <div class="mensagem-erro mt-1 ms-3">
+            Campo obrigatório
+        </div>
+    }
+    @if(control.errors['email']){
+        <div class="mensagem-erro mt-1 ms-3">
+            Formato de e-mail inválido
+        </div>
+    }
+
+    @if(control.errors['minlength']){
+        <div class="mensagem-erro mt-1 ms-3">
+            Telefone inválido
+        </div>
+    }
+    
+    @if(control.errors['senhaInvalid']){
+        <div class="mensagem-erro mt-1 ms-3">
+            A senha deve conter: <br>
+            - Mais de 8 caracteres <br>
+            - Letras maiúsculas e minúsculas
+        </div>
+    }
+    
+}

@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-image: url("https://codzsword.github.io/bootstrap-sidebar/background-image.jpg");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+}
+
+h3 {
+  font-size: 1.2375rem;
+  color: #3a3a3a;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+li {
+  list-style: none;
+}
+
+/* Layout skeleton */
+
+.wrapper {
+  align-items: stretch;
+  display: flex;
+  width: 100%;
+}
+
+#sidebar {
+  max-width: 264px;
+  min-width: 264px;
+  transition: all 0.35s ease-in-out;
+  z-index: 1111;
+}
+
+#upbar {
+    transition: all 0.35s ease-in-out;
+    z-index: 1112; 
+}
+
+#sidebar.collapsed {
+  margin-left: -264px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  transition: all 0.35s ease-in-out;
+}
+
+.main.sidebar-collapsed {
+  margin-left: 0;
+}
+
+.sidebar-logo {
+  padding: 1.15rem 1.5rem;
+}
+
+
+.btn-clean:focus,.btn-clean{
+    border: 0 !important;
+}
+
+
+.sidebar-nav {
+  padding: 0;
+}
+
+.sidebar-header {
+  color: #3a3a3a;
+  font-size: .75rem;
+  padding: 1.5rem 1.5rem .375rem;
+}
+
+a.sidebar-link {
+  padding: .625rem 1.625rem;
+  color: #3a3a3a;
+  position: relative;
+  display: block;
+  font-size: 1rem;
+}
+
+.sidebar-link[data-bs-toggle="collapse"]::after {
+  border: solid;
+  border-width: 0 .075rem .075rem 0;
+  content: "";
+  display: inline-block;
+  padding: 2px;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.4rem;
+  transform: rotate(-135deg);
+  transition: all .4s ease-out;
+}
+
+.sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+  transform: rotate(45deg);
+  transition: all .2s ease-out;
+}
+
+.content {
+  flex: 1;
+  max-width: 100vw;
+  width: 100vw;
+}
+
+main{
+    background-color: #e9ecef;
+}
+
+.sidebar-dropdown .sidebar-item .sidebar-link{
+    font-size: 0.8rem;
+}
+
+.icon{
+  font-size: 1.3rem;
+}
+
+.text{
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.email{
+  font-size: 0.6rem;
+}
+
+.vermelho{
+  color: #de5454;
+}
+
+.perfil {
+  max-width: 35px;
+  max-height: 35px;
+}
+
+.sidebar-item h6,
+    .sidebar-item p {
+        margin-bottom: 0;
+    }
+    
+
+/* Responsive */
+
+@media (min-width: 768px) {
+  #sidebar {
+    margin-left: 0;
+  }
+
+  .content {
+    width: auto;
+  }
+}
+
+@media (max-width: 767.98px) {
+  #sidebar.collapsed {
+    margin-left: -264px;
+  }
+
+  #sidebar.show {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg bg-white p-0">
+  <div class="container container-custom p-0">
+    <a class="navbar-brand p-0" href="#">
+      <img src="assets/logo.png" alt="Logo" class="img img-fluid img-bk" width="200" height="50">
+    </a>
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" [ngClass]="{'show': !isCollapsed}" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto gap-4 px-3 py-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" aria-expanded="false">
+            Perfil
+          </a>
+          <ul class="dropdown-menu p-0 mt-3">
+            <li><a class="dropdown-item p-3" href="#"><i class="bi bi-person-vcard icon verde  me-2"></i> Aluno</a>
+            </li>
+            <li><a class="dropdown-item p-3" href="#"><i class="bi bi-person-workspace icon azul  me-2"></i>
+                Professor</a></li>
+            <li><a class="dropdown-item p-3" href="#"><i class="bi bi-mortarboard icon laranja  me-2"></i>
+                Instituição</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" aria-expanded="false">
+            Desempenho
+          </a>
+          <ul class="dropdown-menu desempenho px-3 py-2 mt-3">
+            <div class="row mx-0">
+              <div class="col-md-6">
+                <label class="nav-title">Aluno</label>
+                <ul class="list-unstyled ">
+                  <li><a class="dropdown-item p-2" href="#"><i class="bi bi-bar-chart icon me-2 cinza"></i> Prova</a></li>
+                  <li><a class="dropdown-item p-2" href="#"><i class="bi bi-book icon me-2 vermelho"></i> Conteúdo</a></li>
+                  <li><a class="dropdown-item p-2" href="#"><i class="bi bi-clipboard2-pulse icon me-2 marrom"></i> Disciplina</a></li>
+                  <li><a class="dropdown-item p-2" href="#"><i class="bi bi-calendar4-week icon me-2 roxo"></i> Boletim</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <label class="nav-title">Professor</label>
+                <ul class="list-unstyled">
+                  <li><a class="dropdown-item p-2" href="#"><i class="bi bi-list-check icon me-2 laranja"></i> Turma</a></li>
+                  <li><a class="dropdown-item p-2" href="#"><i class="bi bi-person-video3 icon me-2 verde"></i> Aluno</a></li>
+                  <li><a class="dropdown-item p-2" href="#"><i class="bi bi-recycle icon me-2 azul"></i> Conteúdo</a></li>
+                  <li><a class="dropdown-item p-2" href="#"><i class="bi bi-radar icon me-2 roxo"></i> Notas</a></li>
+                </ul>
+              </div>
+            </div>
+          </ul>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" aria-expanded="false">
+            Provas
+          </a>
+          <ul class="dropdown-menu p-0 mt-3">
+            <li><a class="dropdown-item p-3" href="#"><i class="bi bi-robot icon azul  me-2"></i> 
+              IA</a>
+            </li>
+            <li><a class="dropdown-item p-3" href="#"><i class="bi bi-pencil-square icon verde  me-2"></i>
+                Correção</a></li>
+            <li><a class="dropdown-item p-3" href="#"><i class="bi bi-sliders2 icon laranja  me-2"></i>
+                Controle</a></li>
+            <li><a class="dropdown-item p-3" href="#"><i class="bi bi-gear icon cinza me-2"></i>
+              Gerenciamento</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" type="button" [routerLink]="['/login']">Login</a>
+        </li>
+        <button type="button" class="btn btn-outline-primary" [routerLink]="['/comecar']" >Começar</button>
+      </ul>
+    </div>
+  </div>
+</nav>
