@@ -1,0 +1,272 @@
+<app-sidebar [naoLidas]="naoLidas">
+    <div class="">
+        <div class="row gap-xl-0 gap-2">
+            <div class="col-12 col-xl-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row d-flex align-items-center mb-4">
+                            <div class="col-auto">
+                                <span>
+                                    <i class="bi-chat-right-dots icon-menu"></i>
+                                </span>
+                            </div>
+                            <div class="col">
+                                <h4 class="my-0 fw-semibold text">Mensagens</h4>
+                                <p class="text-muted mb-1 second">Suas Mensagens</p>
+                            </div>
+                        </div>
+                        <div class="row my-3 px-0 px-xxl-2">
+                            <div class="pb-1 text-center d-flex gap-2">
+                                <button (click)="selectMenu('minhas')" class="btn w-100 mb-2"
+                                    [ngClass]="selectedMenu == 'minhas'? 'btn-dark' : 'btn-outline-dark'"><i
+                                        class="bi bi-inbox text-center me-2 icon"></i>
+                                    <div class="second">Minhas mensagens</div>
+                                </button>
+                                <button (click)="selectMenu('news')" class="btn w-100 mb-2"
+                                    [ngClass]="selectedMenu == 'news'? 'btn-dark' : 'btn-outline-dark'"><i
+                                        class="bi bi-newspaper text-center me-2 icon"></i>
+                                    <div class="second">Novidades</div>
+                                </button>
+                            </div>
+                            <div class="pb-1 text-center d-flex gap-2">
+                                <button (click)="selectMenu('enviados')" class="btn w-100 mb-2"
+                                    [ngClass]="selectedMenu == 'enviados'? 'btn-dark' : 'btn-outline-dark'"><i
+                                        class="bi bi-send text-center me-2 icon"></i>
+                                    <div class="second">Enviados</div>
+                                </button>
+                                <button (click)="selectMenu('removidos')" class="btn w-100 mb-2"
+                                    [ngClass]="selectedMenu == 'removidos'? 'btn-dark' : 'btn-outline-dark'"><i
+                                        class="bi bi-trash text-center me-2 icon"></i>
+                                    <div class="second">Removidos</div>
+                                </button>
+                            </div>
+                            <div class="justify-content-end mt-3">
+                                <button class="btn  w-100" (click)="selectMenu('add')"
+                                    [ngClass]="selectedMenu == 'add'? 'btn-dark' : 'btn-outline-dark'"><i
+                                        class="bi bi-plus-square me-2"></i> Novo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xl-8">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <table class="table table-striped mb-4" *ngIf="selectedMenu == 'minhas'">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Remetente</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let mensagem of mensagens_recebidas" (click)="toggleCollapse(mensagem.id)"
+                                    class="cursor">
+                                    <td><i class="bi bi-envelope-arrow-down"></i></td>
+                                    <th scope="row" class="text-capitalize">{{mensagem.remetente?.nome}}</th>
+                                    <td class="text-capitalize">{{mensagem.tipo}}</td>
+                                    <td class="text-capitalize" *ngIf="mensagem?.status === 'enviado'">Não lido</td>
+                                    <td class="text-capitalize" *ngIf="mensagem?.status === 'lido'">Lido</td>
+                                    <td class="text-capitalize" *ngIf="mensagem?.status === 'respondido'">Respondido
+                                    </td>
+                                    <td class="text-capitalize">{{mensagem.create_time | dateFormat}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <table class="table table-striped mb-4" *ngIf="selectedMenu == 'enviados'">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Destinatário</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let mensagem of mensagens_enviadas" (click)="toggleCollapse(mensagem.id)"
+                                    class="cursor">
+                                    <td><i class="bi bi-send"></i></td>
+                                    <th scope="row" class="text-capitalize">{{mensagem.destinatario?.nome}}</th>
+                                    <td class="text-capitalize">{{mensagem.tipo}}</td>
+                                    <td class="text-capitalize" *ngIf="mensagem?.status === 'enviado'">Não lido</td>
+                                    <td class="text-capitalize" *ngIf="mensagem?.status === 'lido'">Lido</td>
+                                    <td class="text-capitalize" *ngIf="mensagem?.status === 'respondido'">Respondido
+                                    </td>
+                                    <td class="text-capitalize">{{mensagem.create_time | dateFormat}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <div class="" *ngIf="selectedMenu == 'add'">
+                            <form>
+                                <div class="row d-flex align-items-center mb-4">
+                                    <div class="col-auto">
+                                        <span>
+                                            <i class="bi bi-send-plus icon-menu"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="my-0 fw-semibold text">Nova Mensagem</h4>
+                                    </div>
+                                    <div class="col d-flex justify-content-end align-items-end gap-2">
+                                        <div class="dropdown-center">
+                                            <button class="btn btn-outline-dark dropdown-toggle" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Tipo de mensagem
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item"
+                                                        (click)="toggleMsgType('direta')">Direta</a></li>
+                                                <li><a class="dropdown-item"
+                                                        (click)="toggleMsgType('anuncio')">Anúncio</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="container p-4">
+                                        <div class="show" *ngIf="selectedType == 'direta'" [@expandWidth]>
+                                            <div class="card card-body p-xl-4 p-3">
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlInput1" class="form-label text">Título</label>
+                                                    <input type="text" class="form-control second" id="exampleFormControlInput1" placeholder="Título da mensagem">
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label for="exampleFormControlTextarea1" class="form-label">Mensagem</label>
+                                                    <textarea class="form-control second" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                  </div>
+                                            </div>
+                                        </div>
+                                        <div class="show" *ngIf="selectedType == 'anuncio'" [@expandWidth]>
+                                            <div class="card card-body">
+                                                anuncio
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="show" *ngIf="selectedMenu == 'minhas'" >
+                            <div class="" *ngFor="let mensagem of mensagens_recebidas">
+                                <div class="collapse " [ngClass]="isCollapsed(mensagem.id) ? 'show' : ''">
+                                    <div class="show" *ngIf="mensagem.tipo === 'convite'" >
+                                        <div class="card card-body">
+                                            <div class="row d-flex align-items-center justify-content-between mb-2">
+                                                <div class="col-auto">
+                                                    <h4 class="my-0 fw-semibold text">{{mensagem.remetente?.nome}}</h4>
+                                                    <p class="text-muted mb-1 second">{{mensagem.remetente?.email}}</p>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <p class="text-muted mb-1 second">{{mensagem.create_time |
+                                                        dateFormat}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="container p-3 d-flex justify-content-center align-items-center">
+                                                <div class="row d-flex align-items-center gap-5">
+                                                    <div class="col-auto">
+                                                        <h4 class="my-0 fw-semibold text-plus">Convite para Professor
+                                                        </h4>
+                                                        <div class="row d-flex align-items-center">
+                                                            <div class="col-auto">
+                                                                <i class="bi bi-globe second pe-1">
+                                                                    {{mensagem.convite?.convite_professor?.unidade?.instituicao?.nome}}</i>
+                                                            </div>
+                                                            <div class="col d-flex align-items-center pe-3">
+                                                                <i class="bi bi-building second pe-1">
+                                                                    {{mensagem.convite?.convite_professor?.unidade?.nome}}</i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <button type="button" class="btn btn-success m-3"
+                                                            (click)="aceitarConvite(mensagem)">Aceitar</button>
+                                                        <button type="button" class="btn btn-danger m-3"
+                                                            (click)="recusarConvite(mensagem)">Recusar</button>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="container p-3 d-flex justify-content-start align-items-center">
+                                                <p class="text-muted mb-1 second"><strong
+                                                        class="text-capitalize">{{mensagem.remetente?.nome}}</strong>
+                                                    está convidando você para ser professor da unidade <strong
+                                                        class="text-capitalize">{{mensagem.convite?.convite_professor?.unidade?.nome}}</strong>
+                                                    da instituição <strong
+                                                        class="text-capitalize">{{mensagem.convite?.convite_professor?.unidade?.instituicao?.nome}}</strong>.
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="show" *ngIf="selectedMenu == 'enviados'" >
+                            <div class="" *ngFor="let mensagem of mensagens_enviadas">
+                                <div class="collapse" [ngClass]="isCollapsed(mensagem.id) ? 'show' : ''">
+                                    <div class="show"  >
+                                        <div class="card card-body show"  *ngIf="mensagem.tipo === 'convite'" >
+                                            <div class="row d-flex align-items-center justify-content-between mb-2">
+                                                <div class="col-auto">
+                                                    <h4 class="my-0 fw-semibold text">{{mensagem.destinatario?.nome}}
+                                                    </h4>
+                                                    <p class="text-muted mb-1 second">{{mensagem.destinatario?.email}}
+                                                    </p>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <p class="text-muted mb-1 second">{{mensagem.create_time |
+                                                        dateFormat}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="container p-3 d-flex justify-content-center align-items-center">
+                                                <div class="row d-flex align-items-center gap-5">
+                                                    <div class="col-auto">
+                                                        <h4 class="my-0 fw-semibold text-plus">Convite para Professor
+                                                        </h4>
+                                                        <div class="row d-flex align-items-center">
+                                                            <div class="col-auto">
+                                                                <i class="bi bi-globe second pe-1">
+                                                                    {{mensagem.convite?.convite_professor?.unidade?.instituicao?.nome}}</i>
+                                                            </div>
+                                                            <div class="col d-flex align-items-center pe-3">
+                                                                <i class="bi bi-building second pe-1">
+                                                                    {{mensagem.convite?.convite_professor?.unidade?.nome}}</i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                            <div class="container p-3 d-flex justify-content-start align-items-center">
+                                                <p class="text-muted mb-1 second">Você
+                                                    convidou <strong class="text-capitalize">{{mensagem.destinatario?.nome}} </strong> para ser professor da unidade <strong
+                                                        class="text-capitalize">{{mensagem.convite?.convite_professor?.unidade?.nome}}</strong>
+                                                    da instituição <strong
+                                                        class="text-capitalize">{{mensagem.convite?.convite_professor?.unidade?.instituicao?.nome}}</strong>.
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-sidebar>

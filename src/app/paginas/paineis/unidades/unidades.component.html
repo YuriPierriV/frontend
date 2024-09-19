@@ -1,0 +1,239 @@
+<app-sidebar>
+  <div>
+    <div *ngIf="user?.usuario?.tipo === 'instituicao' && user?.instituicao?.confirmed === true"
+      class="row gap-3 gap-xl-0">
+      <div class="row d-flex align-items-center mb-3 p-0 m-0">
+        <div class="col-12 px-0 px-xl-2">
+          <div class="card">
+            <div class="card-body">
+              <div class="row ">
+                <div class="col-auto">
+                  <span>
+                    <i class="bi bi-globe icon-prin p-2 rounded-2"></i>
+                  </span>
+                </div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col-12 d-flex align-items-center">
+                      <h4 class="my-0 fw-semibold text text-capitalize">{{user.instituicao?.nome}}</h4>
+                      <a><i class="bi bi-chevron-down ms-2"></i></a>
+                      <i class="bi bi-info-circle ms-2"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="col-xl-5 px-0 px-xl-2">
+        <div class="card">
+          <div class="card-body p-4">
+            <div class="row d-flex align-items-center mb-4">
+              <div class="col-auto">
+                <span>
+                  <i class="bi bi-building icon-geo"></i>
+                </span>
+              </div>
+              <div class="col">
+                <h4 class="my-0 fw-semibold text">Unidades</h4>
+                <p class="text-muted mb-1 second">Unidades cadastradas na {{user.instituicao?.nome}}</p>
+              </div>
+            </div>
+            <div class="row my-3 px-0 px-xxl-5">
+              <div class="pb-2" *ngFor="let unidade of user?.instituicao?.unidades">
+                <div class="card selecao_unidade px-0 py-2" (click)="selectUnidade(unidade.id)"
+                  [ngClass]="selectedPainel === unidade.id ? 'selected' : ''">
+                  <div class="card-body">
+                    <div class="row d-flex align-items-center">
+                      <div class="col-auto">
+                        <span>
+                          <i class="bi bi-geo icon-geo"></i>
+                        </span>
+                      </div>
+                      <div class="col">
+                        <h4 class="my-0 fw-semibold text">{{unidade.nome}}</h4>
+                        <p class="text-muted mb-1 second">{{unidade.estado}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="justify-content-end mt-3">
+                <button class="btn w-100" (click)="selectUnidade('new unidade')"
+                  [ngClass]="selectedPainel === 'new unidade' ? 'btn-secondary' : 'btn-outline-secondary'">Cadastrar
+                  nova unidade</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-7 px-0 px-xl-2" *ngIf="selectedPainel === 'new unidade'">
+        <div class="card mh-100 h-100">
+          <div class="card-body p-4">
+            <div class="row d-flex align-items-center mb-4">
+              <div class="col-auto">
+                <span>
+                  <i class="bi bi-plus-circle plus p-3 rounded-5"></i>
+                </span>
+              </div>
+              <div class="col">
+                <h4 class="my-0 fw-semibold text">Cadastrar Unidade:</h4>
+                <p class="text-muted mb-1 second">Confirme informações e configure sua nova unidade</p>
+              </div>
+            </div>
+            <div class="row my-3 px-0 px-xl-5">
+              <div class="card px-xxl-3 px-0 py-2">
+                <div class="card-body">
+                  <form [formGroup]="form_unidade">
+                    <div class="container">
+                      <div class="row g-3 pb-2">
+                        <div class="col-xl-6 col-12">
+                          <label for="exampleInputNomeUnidade1" class="form-label">Nome Unidade</label>
+                          <input type="text" class="form-control" id="exampleInputNomeUnidade1"
+                            formControlName="nome_unidade">
+                          <app-msg-erro [control]="obterControle('nome_unidade')"></app-msg-erro>
+                        </div>
+                        <div class="col-xl-6 col-12">
+                          <label for="exampleInputFone1" class="form-label">Telefone</label>
+                          <input type="phone" mask="(00) 00000-0009" class="form-control" id="exampleInputFone1"
+                            formControlName="telefone_unidade">
+                          <app-msg-erro [control]="obterControle('telefone_unidade')"></app-msg-erro>
+                        </div>
+                      </div>
+                      <div class="row g-3 pb-2">
+                        <div class="col-12">
+                          <label for="exampleInputEndereco1" class="form-label">Endereco</label>
+                          <input type="text" class="form-control" id="exampleInputEndereco1"
+                            formControlName="endereco_unidade">
+                          <app-msg-erro [control]="obterControle('endereco_unidade')"></app-msg-erro>
+                        </div>
+                      </div>
+                      <div class="row g-3 pb-2">
+                        <div class="col-xl-6 col-12">
+                          <label for="exampleInputEstado1" class="form-label">Estado</label>
+                          <select class="form-select" id="exampleInputEstado1" formControlName="estado_unidade">
+                            <option *ngFor="let estado of estados" [value]="estado.nome">{{ estado.sigla }}</option>
+                          </select>
+                          <app-msg-erro [control]="obterControle('estado_unidade')"></app-msg-erro>
+                        </div>
+                        <div class="col-xl-6 col-12">
+                          <label for="exampleInputCidade1" class="form-label">Cidade</label>
+                          <input type="text" class="form-control" id="exampleInputCidade1"
+                            formControlName="cidade_unidade">
+                          <app-msg-erro [control]="obterControle('cidade_unidade')"></app-msg-erro>
+                        </div>
+                      </div>
+                      <div class="row g-3 pb-2">
+                        <div class="col-xl-6 col-12">
+                          <label for="exampleInputBairro1" class="form-label">Bairro</label>
+                          <input type="text" class="form-control" id="exampleInputBairro1"
+                            formControlName="bairro_unidade">
+                          <app-msg-erro [control]="obterControle('bairro_unidade')"></app-msg-erro>
+                        </div>
+                        <div class="col-xl-6 col-12">
+                          <label for="exampleInputCep1" class="form-label">CEP</label>
+                          <input type="text" mask="00000-000" class="form-control" id="exampleInputCep1"
+                            formControlName="cep_unidade">
+                          <app-msg-erro [control]="obterControle('cep_unidade')"></app-msg-erro>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row d-flex justify-content-end mt-3">
+                      <div class="col-xl-6">
+                        <button [disabled]="form_unidade.invalid"
+                          [ngClass]="form_unidade.valid ? 'btn-primary' : 'btn-outline-primary'" type="submit"
+                          class="btn w-100" (click)="salvarUnidade()">Cadastrar
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-7 px-0 px-xl-2" *ngFor="let unidade of filteredUnidades">
+        <div class="card mh-100 h-100">
+          <div class="card-body p-4">
+            <div class="row d-flex align-items-center mb-4">
+              <div class="col">
+                <h4 class="my-0 fw-semibold text">{{user.instituicao?.nome}} - {{unidade.nome}}</h4>
+                <p class="text-muted mb-1 second">Confirme informações e configure sua nova unidade</p>
+              </div>
+            </div>
+            <div class="row my-3 px-0 px-xl-2">
+              <form [formGroup]="form_unidade_edit">
+                <div class="container">
+                  <div class="row g-3 pb-2">
+                    <div class="col-xl-6 col-12">
+                      <label for="exampleInputNomeUnidade1" class="form-label">Nome Unidade</label>
+                      <input type="text" class="form-control" id="exampleInputNomeUnidade1"
+                        formControlName="nome_unidade">
+                      <app-msg-erro [control]="obterControle('nome_unidade')"></app-msg-erro>
+                    </div>
+                    <div class="col-xl-6 col-12">
+                      <label for="exampleInputFone1" class="form-label">Telefone</label>
+                      <input type="phone" mask="(00) 00000-0009" class="form-control" id="exampleInputFone1"
+                        formControlName="telefone_unidade">
+                      <app-msg-erro [control]="obterControle('telefone_unidade')"></app-msg-erro>
+                    </div>
+                  </div>
+                  <div class="row g-3 pb-2">
+                    <div class="col-12">
+                      <label for="exampleInputEndereco1" class="form-label">Endereco</label>
+                      <input type="text" class="form-control" id="exampleInputEndereco1"
+                        formControlName="endereco_unidade">
+                      <app-msg-erro [control]="obterControle('endereco_unidade')"></app-msg-erro>
+                    </div>
+                  </div>
+                  <div class="row g-3 pb-2">
+                    <div class="col-xl-6 col-12">
+                      <label for="exampleInputEstado1" class="form-label">Estado</label>
+                      <select class="form-select" id="exampleInputEstado1" formControlName="estado_unidade">
+                        <option *ngFor="let estado of estados" [value]="estado.nome">{{ estado.sigla }}</option>
+                      </select>
+                      <app-msg-erro [control]="obterControle('estado_unidade')"></app-msg-erro>
+                    </div>
+                    <div class="col-xl-6 col-12">
+                      <label for="exampleInputCidade1" class="form-label">Cidade</label>
+                      <input type="text" class="form-control" id="exampleInputCidade1" formControlName="cidade_unidade">
+                      <app-msg-erro [control]="obterControle('cidade_unidade')"></app-msg-erro>
+                    </div>
+                  </div>
+                  <div class="row g-3 pb-2">
+                    <div class="col-xl-6 col-12">
+                      <label for="exampleInputBairro1" class="form-label">Bairro</label>
+                      <input type="text" class="form-control" id="exampleInputBairro1" formControlName="bairro_unidade">
+                      <app-msg-erro [control]="obterControle('bairro_unidade')"></app-msg-erro>
+                    </div>
+                    <div class="col-xl-6 col-12">
+                      <label for="exampleInputCep1" class="form-label">CEP</label>
+                      <input type="text" mask="00000-000" class="form-control" id="exampleInputCep1"
+                        formControlName="cep_unidade">
+                      <app-msg-erro [control]="obterControle('cep_unidade')"></app-msg-erro>
+                    </div>
+                  </div>
+                </div>
+                <div class="row d-flex justify-content-end mt-3">
+                  <div class="col-xl-6">
+                    <button [disabled]="form_unidade_edit.invalid"
+                      [ngClass]="form_unidade_edit.valid ? 'btn-primary' : 'btn-outline-primary'" type="submit"
+                      class="btn w-100" (click)="editarUnidade()">Atualizar Dados
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-sidebar>

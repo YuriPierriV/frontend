@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { GoogleComponent } from '../../componentes/google/google.component';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsLayoutComponent } from '../../componentes/forms-layout/forms-layout.component';
-import { User } from '../../typings/user';
+import { Usuario } from '../../typings/models';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user/user.service';
 import { AuthService } from '../../tokenauth/auth.service';
 import { MainImageComponent } from "../../componentes/main-image/main-image.component";
 import { MsgErroComponent } from "../../componentes/msg-erro/msg-erro.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
+    CommonModule,
     GoogleComponent,
     FormsLayoutComponent,
     RouterLink,
@@ -24,7 +26,7 @@ import { MsgErroComponent } from "../../componentes/msg-erro/msg-erro.component"
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-  user: User = {};
+  user: Usuario = {};
   form!: FormGroup;
 
   constructor(
@@ -59,7 +61,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.autenticar(email, senha).subscribe({
       next: (response) => {
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/painel');
       },
       error: (err) => {
         console.log("Erro no login", err);

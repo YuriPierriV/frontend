@@ -1,0 +1,307 @@
+<app-sidebar>
+    <div *ngIf="objeto.usuario?.tipo == 'aluno'" class="">
+        <div class="row gap-3 gap-xl-0">
+            <div class="col-xl-5 px-0 px-xl-3">
+                <div class="card mh-100 h-100">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <img src="{{objeto.usuario?.img_link}}"  alt="" class="img-fluid avatar rounded me-3">
+                                    <div class="flex-grow-1 ">
+                                        <h4 class="mb-1 mt-0 text">{{objeto.usuario?.nome}} {{objeto.usuario?.sobrenome}}</h4>
+                                        <p class="email m-0 second text-capitalize text-muted">{{objeto.usuario?.tipo}}</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="col-auto text-end">
+                                <i class="bi bi-three-dots"></i>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <ul class="list-inline m-0 mt-3">
+                                <li class="list-inline-item mb-sm-0 mb-2 me-sm-2 second"><i class="bi bi-envelope"></i> {{objeto.usuario?.email}}</li>
+                                <li class="list-inline-item second"><i class="bi bi-telephone"></i> {{objeto.usuario?.telefone | phoneFormat}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-xl-3">
+                <div class="row mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar  me-3">
+                                    <i class="bi bi-clipboard-check  icon p-2 rounded"></i>
+                                </div>
+                                
+                                <div class="flex-grow-1">
+                                    <h3 class="mt-0 mb-0 text-plus">
+                                        21
+                                    </h3>
+                                    <p class="second text-muted mb-0">
+                                        Provas Concluidas
+                                    </p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="card ">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar  me-3">
+                                    <i class="bi bi-calendar-check  icon-red p-2 rounded"></i>
+                                </div>
+                                
+                                <div class="flex-grow-1">
+                                    <h3 class="mt-0 mb-0 text-plus">
+                                        15
+                                    </h3>
+                                    <p class="second text-muted mb-0">
+                                        Provas Marcadas
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 px-0 px-xl-3">
+                <div class="card mh-100 h-100">
+                    <div class="card-body m-2">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="mb-1 mt-0 text-plus">Turma</h4>
+                            </div>
+                            <div class="col-auto text-end">
+                                <i class="bi bi-three-dots"></i>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            imagens alunos e professor
+                        </div>
+                        <p class="second text-muted mt-2">
+                            Turma nome
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div *ngIf="objeto.usuario?.tipo == 'professor'" class="">
+        <div class="row gap-3 gap-xl-0">
+            <div class="col-xl-5 px-0 px-xl-3">
+                <div class="card mh-100 h-100">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <img src="{{objeto.usuario?.img_link}}" alt="" class="img-fluid avatar rounded me-3">
+                                    <div class="flex-grow-1 ">
+                                        <h4 class="mb-1 mt-0 text">{{objeto.usuario?.nome}} {{objeto.usuario?.sobrenome}}</h4>
+                                        <p class="email m-0 second text-capitalize text-muted">{{objeto.usuario?.tipo}}</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="col-auto text-end">
+                                <i class="bi bi-three-dots"></i>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <ul class="list-inline m-0 mt-3">
+                                <li class="list-inline-item mb-sm-0 mb-2 me-sm-2 second"><i class="bi bi-envelope"></i> {{objeto.usuario?.email}}</li>
+                                <li class="list-inline-item second"><i class="bi bi-telephone"></i> {{objeto.usuario?.telefone | phoneFormat}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-xl-3">
+                <div class="row mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar  me-3">
+                                    <i class="bi bi-clipboard-check  icon p-2 rounded"></i>
+                                </div>
+                                
+                                <div class="flex-grow-1">
+                                    <h3 class="mt-0 mb-0 text-plus">
+                                        21
+                                    </h3>
+                                    <p class="second text-muted mb-0">
+                                        Provas Concluidas
+                                    </p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="card ">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar  me-3">
+                                    <i class="bi bi-calendar-check  icon-red p-2 rounded"></i>
+                                </div>
+                                
+                                <div class="flex-grow-1">
+                                    <h3 class="mt-0 mb-0 text-plus">
+                                        15
+                                    </h3>
+                                    <p class="second text-muted mb-0">
+                                        Provas Marcadas
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 px-0 px-xl-3">
+                <div class="card mh-100 h-100">
+                    <div class="card-body m-2">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="mb-1 mt-0 text-plus">Turma</h4>
+                            </div>
+                            <div class="col-auto text-end">
+                                <i class="bi bi-three-dots"></i>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            imagens alunos e professor
+                        </div>
+                        <p class="second text-muted mt-2">
+                            Turma nome
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="objeto.usuario?.tipo == 'instituicao'" class="">
+        <div *ngIf="objeto.instituicao?.confirmed !== true" class="">
+            <div class="row mb-3">
+                <div class="col-12 px-3 ">
+                    <div class="card">
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row gap-3 gap-xl-0">
+            <div class="col-xl-5 px-3 ">
+                <div class="card mh-100 h-100">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <img src="{{objeto.usuario?.img_link}}" alt="" class="img-fluid avatar rounded me-3">
+                                    <div class="flex-grow-1 ">
+                                        <h4 class="mb-1 mt-0 text">{{objeto.usuario?.nome}} {{objeto.usuario?.sobrenome}}</h4>
+                                        <p class="email m-0 second text-capitalize text-muted">{{objeto.usuario?.tipo}}</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="col-auto text-end">
+                                <i class="bi bi-three-dots"></i>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <ul class="list-inline m-0 mt-3">
+                                <li class="list-inline-item mb-sm-0 mb-2 me-sm-2 second"><i class="bi bi-envelope"></i> {{objeto.usuario?.email}}</li>
+                                <li class="list-inline-item second"><i class="bi bi-telephone"></i> {{objeto.usuario?.telefone | phoneFormat}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-xl-3 ">
+                <div class="row mb-3 px-3 px-xl-0">
+                    <div class="card ">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar  me-3">
+                                    <i class="bi bi-clipboard-check  icon p-2 rounded"></i>
+                                </div>
+                                
+                                <div class="flex-grow-1">
+                                    <h3 class="mt-0 mb-0 text-plus">
+                                        21
+                                    </h3>
+                                    <p class="second text-muted mb-0">
+                                        Provas Concluidas
+                                    </p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row px-3 px-xl-0">
+                    <div class="card ">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar  me-3">
+                                    <i class="bi bi-calendar-check  icon-red p-2 rounded"></i>
+                                </div>
+                                
+                                <div class="flex-grow-1">
+                                    <h3 class="mt-0 mb-0 text-plus">
+                                        15
+                                    </h3>
+                                    <p class="second text-muted mb-0">
+                                        Provas Marcadas
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 px-3">
+                <div class="card mh-100 h-100">
+                    <div class="card-body m-2">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="mb-1 mt-0 text-plus">Turma</h4>
+                            </div>
+                            <div class="col-auto text-end">
+                                <i class="bi bi-three-dots"></i>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            imagens alunos e professor
+                        </div>
+                        <p class="second text-muted mt-2">
+                            Turma nome
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-sidebar>

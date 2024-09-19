@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { User } from '../../typings/user';
-import { UserService } from '../../services/user/user.service';
-import { FormsLayoutInverseComponent } from '../../componentes/forms-layout-inverse/forms-layout-inverse.component';
+import { Usuario } from '../../../typings/models';
+import { UserService } from '../../../services/user/user.service';
+import { FormsLayoutInverseComponent } from '../../../componentes/forms-layout-inverse/forms-layout-inverse.component';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MsgErroComponent } from '../../componentes/msg-erro/msg-erro.component';
-import { senhaValidator } from '../../validators/validators';
+import { MsgErroComponent } from '../../../componentes/msg-erro/msg-erro.component';
+import { senhaValidator } from '../../../validators/validators';
 import { IConfig, NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
 
 @Component({
@@ -28,7 +28,7 @@ import { IConfig, NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CadastroComponent implements OnInit {
-  user: User = {};
+  user: Usuario = {};
   form!: FormGroup;
 
   constructor(private userService: UserService, private router: Router, private activatedRouter: ActivatedRoute) {}
@@ -61,12 +61,12 @@ export class CadastroComponent implements OnInit {
 
   salvarContato() {
     const novoContato = this.form.value;
-    this.userService.salvarUsuario(novoContato).subscribe({
+    this.userService.salvarUsuario(novoContato,'Cadastrando um novo usuário!').subscribe({
       next: (response) => {
         this.userService.salvarToken(response.token); // Salva o token recebido
         this.userService.setUser(response.user); // Define o usuário atual
         this.form.reset();
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/painel');
       },
       error: (err) => {
         

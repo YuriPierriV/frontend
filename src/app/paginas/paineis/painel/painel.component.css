@@ -1,0 +1,20 @@
+
+
+.avatar{
+    width: 48px;
+    height: 48px;
+}
+
+
+
+.icon{
+    font-size: 1.8rem;
+    background-color: #97db7949;
+    color: #51a82c;
+}
+
+.icon-red{
+    font-size: 1.8rem;
+    background-color: #1557da6b;
+    color: #064bd6;
+}

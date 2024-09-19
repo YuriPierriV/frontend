@@ -8,21 +8,22 @@
         <h6 class="h5 mb-0 mt-3 text">
             Bem-vindo!
         </h6>
-        <p class="text-muted mt-1 mb-4 text">
+        <p class="text-muted mt-1 mb-4 second">
             Registre seu email e nome para iniciar seu cadastro.
         </p>
-        <form action="/cadastro" method="POST">
+        <form [formGroup]="form">
             <div class="mb-3">
                 <label for="exampleInputName1" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="exampleInputName1" name="name">
+                <input type="text" formControlName="nome" class="form-control second" id="exampleInputName1" name="name">
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                <input type="email" class="form-control second" formControlName="email" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
                 <div id="emailHelp" class="form-text" >Nunca compartilharemos seu e-mail com ninguém.</div>
             </div>
               
-            <button type="submit" class="btn btn-primary w-100">Começar</button>            
+            <button type="submit" class="btn w-100" [disabled]="form.invalid"
+            [ngClass]="form.valid ? 'btn-primary' : 'btn-outline-primary'" (click)="salvarComeco()">Começar</button>            
         </form>
         <div class="py-3 text-center">
             <span class="fs-13 fw-bold text-muted">OU</span>
@@ -88,7 +89,7 @@
                  
     </div>
     <div aviso>
-        <p class="text-muted">Já tem uma conta? <a href="" class="text-primary fw-semibold ms-1">Login</a></p>
+        <p class="text-muted">Já tem uma conta? <a [routerLink]="['/login']" class="text-primary fw-semibold ms-1">Login</a></p>
         
     </div>
 </app-forms-layout>

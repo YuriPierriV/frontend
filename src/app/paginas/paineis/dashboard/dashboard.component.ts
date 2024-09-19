@@ -1,23 +1,26 @@
 import { Component } from '@angular/core';
-import { SidebarComponent } from '../../componentes/sidebar/sidebar.component';
+import { Usuario } from '../../../typings/models';
+import { SidebarComponent } from '../../../componentes/sidebar/sidebar.component';
 import { Router, RouterLink } from '@angular/router';
-import { TokenService } from '../../tokenauth/token.service';
-import { UserService } from '../../services/user/user.service';
-import { User } from '../../typings/user';
+import { PhoneFormatPipe } from '../../../componentes/pipe/phone-format.pipe';
+import { TokenService } from '../../../tokenauth/token.service';
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-dashboard',
   standalone: true,
   imports: [
     SidebarComponent,
-    RouterLink
+    RouterLink,
+    PhoneFormatPipe
   ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css'
 })
-export class HomeComponent {
+export class DashboardComponent {
+  /*
   token = '';
-  user: User = {};
+  user: Usuario = {};
 
   constructor(
     private tokenService: TokenService,
@@ -31,6 +34,10 @@ export class HomeComponent {
       this.userService.getUserData().subscribe({
         next: (user: User) => {
           this.user = user;
+          console.log(this.user)
+          if(user.confirmed == false || user.confirmed == null){
+            this.router.navigateByUrl("/cadastro")
+          }
         },
         error: (err) => {
           if(err.error.msg == "Token has expired"){
@@ -41,5 +48,5 @@ export class HomeComponent {
     } else {
       console.error('Token não encontrado');
     }
-  }
+  }*/
 }

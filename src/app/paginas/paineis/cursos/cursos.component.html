@@ -1,0 +1,136 @@
+<app-sidebar>
+    <div class="">
+      <div *ngIf="objeto?.usuario?.tipo === 'instituicao' && objeto?.instituicao" class="row gap-3 gap-md-0">
+        <div class="row d-flex align-items-center mb-4">
+          <div class="col-auto">
+            <span>
+              <i class="bi bi-building icon-prin p-2 rounded-2"></i>
+            </span>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col-12 d-flex align-items-center">
+                <h4 class="my-0 fw-semibold text text-capitalize">{{filteredUnidades?.[0]?.nome}}</h4>
+                <div class="dropdown">
+                  <button class="btn clean-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-chevron-down ms-2"></i>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li *ngFor="let unidade of objeto?.instituicao?.unidades">
+                      <a class="dropdown-item" (click)="selectUnidade(unidade.id)">{{unidade.nome}}</a>
+                    </li>
+                  </ul>
+                </div>
+                <i class="bi bi-info-circle ms-2"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-xl-5 px-0 px-md-2">
+          <div class="card">
+            <div class="card-body p-4">
+              <div class="row d-flex align-items-center mb-4">
+                <div class="col-auto">
+                  <span>
+                    <i class="bi bi-mortarboard icon-geo"></i>
+                  </span>
+                </div>
+                <div class="col">
+                  <h4 class="my-0 fw-semibold text">Cursos</h4>
+                  <p class="text-muted mb-1 second">Cursos cadastrados na {{objeto.instituicao?.nome}} - {{filteredUnidades?.[0]?.nome}}</p>
+                </div>
+              </div>
+              <div class="row my-3 px-0 px-xxl-5">
+                <div class="pb-2" *ngFor="let curso of filteredUnidades?.[0]?.cursos">
+                  <div class="card selecao_unidade px-0 py-2" (click)="selectCurso(curso.id)" [ngClass]="selectedCurso === curso.id ? 'selected' : ''">
+                    <div class="card-body">
+                      <div class="row d-flex align-items-center">
+                        <div class="col-auto">
+                          <span>
+                            <i class="bi bi-award icon-geo"></i>
+                          </span>
+                        </div>
+                        <div class="col">
+                          <h4 class="my-0 fw-semibold text">{{curso.nome}}</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="justify-content-end mt-3">
+                  <button class="btn w-100" (click)="selectCurso('new curso')" [ngClass]="selectedCurso === 'new curso' ? 'btn-secondary' : 'btn-outline-secondary'">Cadastrar novo curso</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-xl-7 px-0 px-md-2 py-2 py-xl-0" *ngIf="selectedCurso === 'new curso'">
+          <div class="card mh-100 h-100">
+            <div class="card-body p-4">
+              <div class="row d-flex align-items-center mb-4">
+                <div class="col-auto">
+                  <span>
+                    <i class="bi bi-plus-circle plus p-3 rounded-5"></i>
+                  </span>
+                </div>
+                <div class="col">
+                  <h4 class="my-0 fw-semibold text">Cadastrar Curso:</h4>
+                  <p class="text-muted mb-1 second">Confirme informações e configure novo curso para {{filteredUnidades?.[0]?.nome}}</p>
+                </div>
+              </div>
+              <div class="row my-3 px-0 px-md-5">
+                <div class="card px-xxl-3 px-0 py-2">
+                  <div class="card-body">
+                    <form [formGroup]="form_novoCurso">
+                      <div class="container">
+                        <div class="row g-3 pb-2">
+                          <div class="col-xl-12 col-12">
+                            <label for="nomeCurso" class="form-label">Nome Curso</label>
+                            <input type="text" class="form-control" id="nomeCurso" formControlName="nome">
+                            <app-msg-erro [control]="obterControle('nome')"></app-msg-erro>
+                          </div>
+                          <div class="col-xl-12 col-12">
+                            <label for="descCurso" class="form-label">Descrição do Curso</label>
+                            <input type="text" class="form-control" id="descCurso" formControlName="desc">
+                            <app-msg-erro [control]="obterControle('desc')"></app-msg-erro>
+                          </div>
+                          <input type="hidden" formControlName="id_unidade">
+                        </div>
+                      </div>
+                      <div class="row d-flex justify-content-end mt-3">
+                        <div class="col-md-6">
+                          <button [disabled]="form_novoCurso.invalid"
+                                  [ngClass]="form_novoCurso.valid ? 'btn-primary' : 'btn-outline-primary'"
+                                  type="submit" class="btn w-100" (click)="cadastrarCurso()">Cadastrar Curso
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-xl-7 px-0 px-md-2 py-2 py-xl-0" *ngFor="let curso of filteredCurso">
+          <div class="card mh-100 h-100">
+            <div class="card-body p-4">
+              <div class="row d-flex align-items-center mb-4">
+                <div class="col">
+                  <h4 class="my-0 fw-semibold text">{{filteredUnidades?.[0]?.nome}} - {{curso.nome}}</h4>
+                  <p class="text-muted mb-1 second">Confirme informações e configure sua nova unidade</p>
+                </div>
+              </div>
+              <div class="row my-3 px-0 px-md-2">
+                <!-- Conteúdo do formulário de edição do curso -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-sidebar>
+  

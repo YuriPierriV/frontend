@@ -104,13 +104,13 @@
           </div>
           <div class="row d-flex justify-content-end mt-3">
             <div aviso class="col-md-6 align-items-center d-flex some">
-              <p class="text-muted p-0 m-0">Já tem uma conta? <a href="" class="text-primary fw-semibold">Login</a></p>
+              <p class="text-muted p-0 m-0">Já tem uma conta? <a [routerLink]="['/login']" class="text-primary fw-semibold">Login</a></p>
             </div>
             <div class="col-md-6">
               <button
                 [disabled]="form.invalid"
-                [ngClass]="form.valid ? 'botao-salvar' : 'botao-desabilitado'"
-                type="submit" class="btn btn-outline-primary w-100">Cadastrar
+                [ngClass]="form.valid ? 'btn-primary' : 'btn-outline-primary'"
+                type="submit" class="btn w-100">Cadastrar
               </button>
             </div>
           </div>

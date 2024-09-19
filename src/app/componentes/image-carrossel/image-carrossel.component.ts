@@ -25,9 +25,7 @@ export class ImageCarrosselComponent implements AfterViewInit {
         delay: 2500,
         disableOnInteraction: false,
       },
-      slidesPerView: 3,
-      spaceBetween: 10,
-      loop: true,
+      
       mousewheel: true,
       grabCursor: true,
     });

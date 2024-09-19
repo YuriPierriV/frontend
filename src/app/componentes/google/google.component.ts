@@ -1,8 +1,8 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { GoogleService } from '../../services/google/google.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 import { TokenService } from '../../tokenauth/token.service';
+import { Usuario } from '../../typings/models';
 
 @Component({
   selector: 'app-google',
@@ -15,11 +15,13 @@ export class GoogleComponent implements OnInit {
 
   constructor(
     private ngZone: NgZone,
-    private googleAuth: GoogleService, 
     private router: Router,
     private userService: UserService,
     private tokenService: TokenService // Injeção do TokenService
+  
   ) { }
+
+  user:Usuario = {}
 
   ngOnInit(): void {
     this.initializeGoogleSignIn();
@@ -44,12 +46,13 @@ export class GoogleComponent implements OnInit {
 
   handleCredentialResponse(response: any) {
     try {
-      this.googleAuth.auth(response.credential).subscribe(
+      this.user.credential = response.credential
+      this.userService.salvarUsuario(this.user,'Google acess').subscribe(
         (res: any) => {
           if (res.message === 'Login successful!') {
             this.tokenService.salvarToken(res.token); // Salvar o token
             this.userService.setUser(res.user);
-            this.ngZone.run(() => this.router.navigate(['/home']));
+            this.ngZone.run(() => this.router.navigate(['/painel']));
           } else if (res.message === 'User created!' || res.message === 'User nao confirmado!') {
             this.userService.setUser(res.user);
             this.ngZone.run(() => this.router.navigate(['/cadastro']));

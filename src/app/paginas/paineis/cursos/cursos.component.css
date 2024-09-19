@@ -1,0 +1,132 @@
+.exclamation{
+    color: #ff784b;
+    font-size: 1.5rem;
+    background-color: rgba(255, 120, 75, 0.12);
+  
+  }
+  
+  .plus{
+    color: #51ad01;
+    font-size: 1.5rem;
+    background-color: rgba(75, 255, 120, 0.12);
+  
+  }
+  
+  .icon-prin{
+    color: #fbf2f2;
+    font-size: 1.5rem;
+    background-color: #ad01a4;
+  
+  }
+  
+  .icon-geo{
+    font-size: 2rem;
+  }
+  .icon-sub{
+    font-size: 1.3rem;
+  }
+  
+  .selected{
+    border-color: #0D6EFD;
+    box-shadow: 0 8px 20px -6px var(--primary);
+  }
+  
+  
+  .selecao_unidade:hover{
+    cursor: pointer;
+    border-color: var(--primary);
+  }
+  
+  .card-img {
+      width: 100%;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .image-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .form-control, .form-label, .form-select option, .form-select {
+      font-size: 0.8rem;
+    }
+    
+    .botao-salvar {
+      color: #FFFFFF;
+      background-color: #0D6EFD;
+      cursor: pointer;
+    }
+    
+    .botao-desabilitado {
+      background-color: #ADB5BD;
+      cursor: not-allowed;
+    }
+    
+    .aluno_input {
+      position: absolute;
+      bottom: 15px;
+      right: -6px;
+    }
+    
+    .aluno-mark {
+      position: relative;
+      z-index: 10;
+    }
+    
+    .teste {
+      height: 150px;
+      width: 150px;
+    }
+    
+    .teste:hover {
+      cursor: pointer;
+      border: 2px solid #1557da75;
+      border-radius: 5px;
+      border-style: outset;
+      box-shadow: 0 8px 20px -6px var(--primary);
+    }
+    
+    .form-check .form-check-label:has(input[type="radio"]:checked) {
+      cursor: pointer;
+      border: 2px solid #1557da;
+      border-style: outset;
+      border-radius: 5px;
+      box-shadow: 0 8px 20px -6px var(--primary);
+    }
+    
+    .img-responsive {
+      width: 50px;
+      height: 50px;
+      min-height: 50px;
+      max-width: 15vh;
+    }
+
+    .clean-btn{
+        border: 0 !important;
+    }
+    
+    .esquerda {
+      background: radial-gradient(circle, #1044ac 0%, #1557da);
+      height: 100%;
+      width: 100%;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    @media (max-width: 993px) {
+      .principal {
+        margin: 2px !important;
+        padding: 2px !important;
+        margin-bottom: 2rem !important;
+      }
+      .w-25 {
+        min-width: 100% !important;
+      }
+      .some {
+        display: none;
+        visibility: hidden;
+      }
+    }
+    

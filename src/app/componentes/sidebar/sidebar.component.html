@@ -1,142 +1,297 @@
-<div class="wrapper">
-    <aside id="sidebar" [ngClass]="collapsed ? 'collapsed' : 'show'">
-        <div class="h-100 d-flex flex-column">
-            <div>
-                <div class="sidebar-logo justify-content-center d-flex">
-                    <a [routerLink]="['/']" ><img src="assets/logo.png" alt="" class="img-fluid" height="50" width="150"></a>
+<div class="alert  alert-dismissible fade show ms-4" role="alert" id="alert" *ngIf="alert != null" [ngClass]="alert.error != null ? 'alert-danger':'alert-success'">
+    <i class="bi bi-exclamation-circle"></i> {{alert.error.msg}}
+    <button type="button" class="btn-close btn-clean" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+
+
+
+<div *ngIf="loading">
+    <div class="wrapper">
+        <aside id="sidebar" [ngClass]="collapsed ? 'collapsed' : 'show'">
+            <div class="h-100 d-flex flex-column">
+                <div>
+                    <div class="sidebar-logo justify-content-center d-flex">
+                        <a [routerLink]="['/']">
+                            <img src="assets/logo.png" alt="" class="img-fluid" height="50" width="150">
+                        </a>
+                    </div>
+                    <ul class="container d-flex justify-content-center align-items-center mh-100 h-100">
+                        <div class="container ">
+                            <div class="full">
+                                <div class="loading"></div>
+                            </div>
+                        </div>
+                    </ul>
                 </div>
-                <ul class="sidebar-nav">
-                    <li class="sidebar-header">Ferramentas</li>
-                    <li class="sidebar-item">
-                        <a routerLink="/home" class="sidebar-link d-flex align-items-center">
-                            <i class="bi bi-house pe-3 icon"></i>
-                            <div class="text">Home</div>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a routerLink="/dashboard" class="sidebar-link d-flex align-items-center">
-                            <i class="bi bi-graph-up-arrow pe-3 icon"></i>
-                            <div class="text">Dashboard</div>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a  class="sidebar-link collapsed d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#pages"
-                            aria-expanded="false" aria-controls="pages">
-                            <i class="bi bi-clipboard-check pe-3 icon"></i>
-                            <div class="text">Formulários</div>
-                        </a>
-                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse mx-2" data-bs-parent="#sidebar">
-                            <li class="sidebar-item"><a  class="sidebar-link">Criar Novo</a></li>
-                            <li class="sidebar-item"><a  class="sidebar-link">Meus Formulários</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-item">
-                        <a  class="sidebar-link collapsed d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#dashboard"
-                            aria-expanded="false" aria-controls="dashboard">
-                            <i class="bi bi-people pe-3 icon"></i>
-                            <div class="text">Turma</div>
-                        </a>
-                        <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse mx-2" data-bs-parent="#sidebar">
-                            <li class="sidebar-item"><a  class="sidebar-link">Criar Nova</a></li>
-                            <li class="sidebar-item"><a  class="sidebar-link">Minhas Turmas</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-header">Análise</li>
-                    <li class="sidebar-item">
-                        <a  class="sidebar-link d-flex align-items-center">
-                            <i class="bi bi-house pe-3 icon"></i>
-                            <div class="text">Home</div>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a  class="sidebar-link d-flex align-items-center">
-                            <i class="bi bi-graph-up-arrow pe-3 icon"></i>
-                            <div class="text">Dashboard</div>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a  class="sidebar-link collapsed d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#pages"
-                            aria-expanded="false" aria-controls="pages">
-                            <i class="bi bi-clipboard-check pe-3 icon"></i>
-                            <div class="text">Formulários</div>
-                        </a>
-                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse mx-2" data-bs-parent="#sidebar">
-                            <li class="sidebar-item"><a  class="sidebar-link">Criar Novo</a></li>
-                            <li class="sidebar-item"><a  class="sidebar-link">Meus Formulários</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-item">
-                        <a  class="sidebar-link collapsed d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#dashboard"
-                            aria-expanded="false" aria-controls="dashboard">
-                            <i class="bi bi-people pe-3 icon"></i>
-                            <div class="text">Turma</div>
-                        </a>
-                        <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse mx-2" data-bs-parent="#sidebar">
-                            <li class="sidebar-item"><a  class="sidebar-link">Criar Nova</a></li>
-                            <li class="sidebar-item"><a  class="sidebar-link">Minhas Turmas</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <div class="mt-auto">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link d-flex align-items-center">
+                                <i class="bi bi-gear icon pe-3"></i>
+                                <div class="text">Configurações</div>
+                            </a>
+                        </li>
+                        <hr class="w-100 m-auto">
+                        <li class="sidebar-item m-3">
+                            <div class="row w-100 align-items-center">
+                                <div class="col-3 sidebar-link text-center pe-0">
+                                    <img src="{{objeto.usuario?.img_link}}" class="img-fluid rounded-circle perfil" alt="" onerror="this.onerror=null; this.src='assets/user-no_image.png';">
+                                </div>
+                                <div class="col-7 d-flex flex-column justify-content-center p-0">
+                                    <span class="loader-user"></span>
+                                </div>
+                                <div class="col-2 text-center p-0">
+                                    <a class="sidebar-link" (click)="sair()">
+                                        <i class="bi bi-box-arrow-right vermelho icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="mt-auto">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-item">
-                        <a  class="sidebar-link d-flex align-items-center">
-                            <i class="bi bi-gear icon pe-3"></i>
-                            <div class="text">Configurações</div>
-                        </a>
-                    </li>
-                    <hr class="w-100 m-auto">
-                    <li class="sidebar-item m-3">
-                        <div class="row w-100 align-items-center">
-                            <div class="col-3 sidebar-link text-center pe-0">
-                                <img src="{{user?.img_link}}" class="img-fluid rounded-circle perfil" alt="">
+        </aside>
+        <div class="main" [ngClass]="collapsed ? 'sidebar-collapsed' : ''">
+            <div class="container-fluid w-100 p-0" id="upbar">
+                <div class="row justify-content-start w-100">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-md-6 justify-content-start">
+                                <nav class="navbar navbar-expand px-3">
+                                    <button class="btn btn-clean" (click)="toggleSidebar()">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                </nav>
                             </div>
-                            <div class="col-7 d-flex flex-column justify-content-center p-0">
-                                <h6 class="m-0 text">{{user?.nome}} {{user?.sobrenome}}</h6>
-                                <p class="email m-0">{{user?.email}}</p>
+                            <div class="col-md-6 justify-content-end d-none d-md-inline-block">
+                                <nav class="navbar navbar-expand px-3 justify-content-end">
+                                    <button class="btn btn-clean" (click)="toggleSidebar()">
+                                        Search??
+                                    </button>
+                                </nav>
                             </div>
-                            <div class="col-2 text-center p-0">
-                                <a class="sidebar-link" (click)="sair()">
-                                    <i class="bi bi-box-arrow-right vermelho icon"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </aside>
-    <!-- Main Component -->
-    <div class="main" [ngClass]="collapsed ? 'sidebar-collapsed' : ''">
-        <div class="container-fluid w-100 p-0" id="upbar">
-            <div class="row justify-content-start w-100">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-md-6 justify-content-start">
-                            <nav class="navbar navbar-expand px-3">
-                                <button class="btn btn-clean" (click)="toggleSidebar()">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                            </nav>
-                        </div>
-                        <div class="col-md-6 justify-content-end d-none d-md-inline-block">
-                            <nav class="navbar navbar-expand px-3 justify-content-end">
-                                <button class="btn btn-clean" (click)="toggleSidebar()">
-                                    Search??
-                                </button>
-                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
+            <main class="content ">
+                <div class="container container-loading">
+                    <div class="">
+                        <div class="full">
+                            <div class="spinner">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
-        <main class="content p-5">
-            <div class="container">
-                <div class="mb-3">
-                    <ng-content select="[selector]"></ng-content>
+    </div>
+</div>
+
+<div *ngIf="!loading">
+    <div class="wrapper " >
+        <aside id="sidebar" [ngClass]="collapsed ? 'collapsed' : 'show'">
+            <div class="h-100 d-flex flex-column">
+                <div>
+                    <div class="sidebar-logo justify-content-center d-flex">
+                        <a [routerLink]="['/']" ><img src="assets/logo.png" alt="" class="img-fluid" height="50" width="150"></a>
+                    </div>
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-header">Ferramentas</li>
+                        <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >
+                            <a routerLink="/painel" class="sidebar-link d-flex align-items-center">
+                                <i class="bi bi-house pe-3 icon"></i>
+                                <div class="text">Home</div>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                            <a routerLink="/dashboard" class="sidebar-link d-flex align-items-center">
+                                <i class="bi bi-graph-up-arrow pe-3 icon"></i>
+                                <div class="text">Dashboard</div>
+                            </a>
+                        </li>
+                        <li *ngIf="objeto.usuario?.tipo != 'instituicao'" class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                            <a routerLink="/calendario" class="sidebar-link d-flex align-items-center">
+                                <i class="bi bi-calendar-week pe-3 icon"></i>
+                                    <div class="text">Calendário</div>
+                            </a>
+                        </li>
+                        <div class="" *ngIf="objeto.usuario?.tipo == 'aluno'">
+                            <li class="sidebar-header">Aluno</li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link d-flex align-items-center">
+                                    <i class="bi bi-folder2-open pe-3 icon"></i>
+                                    <div class="text">Geral</div>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link d-flex align-items-center">
+                                    <i class="bi bi-journal-bookmark pe-3 icon"></i>
+                                    <div class="text">Matérias</div>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link d-flex align-items-center">
+                                    <i class="bi bi-check2-square pe-3 icon"></i>
+                                    <div class="text">Avaliações</div>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link d-flex align-items-center">
+                                    <i class="bi bi-bar-chart-line pe-3 icon"></i>
+                                    <div class="text">Resultados</div>
+                                </a>
+                            </li>
+                        </div>
+                        <div class="" *ngIf="objeto.usuario?.tipo == 'professor'">
+                            <li class="sidebar-header">Professor</li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link d-flex align-items-center">
+                                    <i class="bi bi-folder2-open pe-3 icon"></i>
+                                    <div class="text">Geral</div>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link d-flex align-items-center">
+                                    <i class="bi bi-people pe-3 icon"></i>
+                                    <div class="text">Turmas</div>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link d-flex align-items-center">
+                                    <i class="bi bi-check2-square pe-3 icon"></i>
+                                    <div class="text">Avaliações</div>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link d-flex align-items-center">
+                                    <i class="bi bi-bar-chart-line pe-3 icon"></i>
+                                    <div class="text">Resultados</div>
+                                </a>
+                            </li>
+                        </div>
+                        <div class="" *ngIf="objeto.usuario?.tipo == 'instituicao'">
+                            <li class="sidebar-header">Instituição</li>
+                            <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                                <a routerLink="/instituicao" class="sidebar-link d-flex align-items-center">
+                                    <i class="bi bi-folder2-open pe-3 icon"></i>
+                                    <div class="text">Geral</div>
+                                </a>
+                            </li>
+                            <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                                <a routerLink="/unidades" class="sidebar-link d-flex align-items-center">
+                                    <i class="bi bi-building pe-3 icon"></i>
+                                    <div class="text">Unidades</div>
+                                </a>
+                            </li>
+                            <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                                <a routerLink="/cursos" class="sidebar-link d-flex align-items-center">
+                                    <i class="bi bi-mortarboard pe-3 icon"></i>
+                                    <div class="text">Cursos</div>
+                                </a>
+                            </li>
+                            <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                                <a routerLink="/professores" class="sidebar-link d-flex align-items-center">
+                                    <i class="bi bi-person-video3 pe-3 icon"></i>
+                                    <div class="text">Professores</div>
+                                </a>
+                            </li>
+                        </div>
+                        <div class="" *ngIf="objeto.usuario?.tipo == 'instituicao' && !objeto.instituicao?.confirmed">
+                            <li class="sidebar-item">
+                                <div class="card m-3">
+                                    <div class="card-body">
+                                        <h4 class="text text-center pb-2">Termine de configurar</h4>
+                                        <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated " style="width: 85%">85%</div>
+                                        </div>
+                                        <p class="second py-2 text-muted">Precisamos de algumas informações para configurar sua Instituição</p>
+                                        <button class="sidebar-link btn btn-outline-primary w-100" routerLink="/instituicao">
+                                            <i class="bi bi-arrow-up-right-square"></i> Configurar
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+                <div class="mt-auto">
+                    <ul class="sidebar-nav">
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="sidebar-item d-flex justify-content-between align-items-center">
+                            <a routerLink="/inbox" class="sidebar-link d-flex align-items-center">
+                                <i class="bi-chat-right-dots icon pe-3"></i>
+                                <div class="text me-3">Mensagens</div>
+                                
+                                <div *ngIf="naoLidas.length > 0" class="rounded-1 bg-primary-subtle ms-auto text p-1 px-2 ms-4 me-4">
+                                    {{naoLidas.length}}
+                                    <span class="visually-hidden">unread messages</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link d-flex align-items-center">
+                                <i class="bi bi-gear icon pe-3"></i>
+                                <div class="text">Configurações</div>
+                            </a>
+                        </li>
+                        <hr class="w-100 m-auto">
+                        <li class="sidebar-item m-3">
+                            <div class="row w-100 align-items-center">
+                                <div class="col-3 sidebar-link text-center pe-0">
+                                    <img src="{{objeto.usuario?.img_link}}" class="img-fluid rounded-circle perfil" alt="">
+                                </div>
+                                <div class="col-7 d-flex flex-column justify-content-center p-0">
+                                    <h6 class="m-0 text">{{objeto.usuario?.nome}} {{objeto.usuario?.sobrenome}}</h6>
+                                    <p class="email m-0">{{objeto.usuario?.email}}</p>
+                                </div>
+                                <div class="col-2 text-center p-0">
+                                    <a class="sidebar-link" (click)="sair()">
+                                        <i class="bi bi-box-arrow-right vermelho icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </main>
+        </aside>
+        <div class="main" [ngClass]="collapsed ? 'sidebar-collapsed' : ''">
+            <div class="container-fluid w-100 p-0 " id="upbar">
+                <div class="row justify-content-start w-100">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-md-6 justify-content-start">
+                                <nav class="navbar navbar-expand px-3">
+                                    <button class="btn btn-clean" (click)="toggleSidebar()">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                </nav>
+                            </div>
+                            <div class="col-md-6 justify-content-end d-none d-md-inline-block">
+                                <nav class="navbar navbar-expand px-3 justify-content-end">
+                                    <button class="btn btn-clean" (click)="toggleSidebar()">
+                                        Search??
+                                    </button>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <main class="content">
+                <div class="scrollable-content">
+                    <div class="m-3">
+                        <ng-content></ng-content>
+                    </div>
+                </div>
+            </main>
+        </div>
     </div>
 </div>

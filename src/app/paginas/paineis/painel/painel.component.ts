@@ -1,34 +1,28 @@
+import { Component, OnInit } from '@angular/core';
+import { SidebarComponent } from '../../../componentes/sidebar/sidebar.component';
+import { Router, RouterLink } from '@angular/router';
+import { TokenService } from '../../../tokenauth/token.service';
+import { UserService } from '../../../services/user/user.service';
+import { Aluno, ConviteProfessor, Curso, Instituicao, Professor, ProfessorUnidade, Turma, TurmaAluno, TurmaCurso, Unidade, Usuario, UsuarioCompleto } from '../../../typings/models';
+import { PhoneFormatPipe } from '../../../componentes/pipe/phone-format.pipe';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from '../../services/user/user.service';
-import { Aluno, Instituicao, Professor, Usuario, UsuarioCompleto } from '../../typings/models';
-import { ActivatedRoute,  Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { TokenService } from '../../tokenauth/token.service';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'app-painel',
   standalone: true,
   imports: [
     CommonModule,
+    SidebarComponent,
     RouterLink,
-    RouterLinkActive,
+    PhoneFormatPipe
   ],
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  templateUrl: './painel.component.html',
+  styleUrls: ['./painel.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class PainelComponent implements OnInit {
   objeto: UsuarioCompleto = {};
-  token: string = '';
-  
-  collapsed: boolean = false;
-  user: Usuario = {};
   loading: boolean = true;
-  mensagens: any = [];
-  
-
-  @Input() page?: string = 'geral';
-  @Input() naoLidas?: any = [];
-  @Input() alert?: any = null;
+  token: string = '';
 
   constructor(
     private tokenService: TokenService,
@@ -36,12 +30,10 @@ export class SidebarComponent implements OnInit {
     private router: Router
   ) {}
 
-
   ngOnInit(): void {
     this.inicializarToken();
     if (this.token) {
       this.carregarDadosUsuario();
-      this.loading = false;
     } else {
       this.redirecionarParaLogin();
     }
@@ -58,7 +50,7 @@ export class SidebarComponent implements OnInit {
     this.userService.getUserData().subscribe({
       next: (resp: any) => {
         this.processarDadosUsuario(resp);
-        console.log(this.objeto);
+        this.loading = false;
       },
       error: (err) => {
         this.tratarErroCarregamentoUsuario(err);
@@ -68,12 +60,10 @@ export class SidebarComponent implements OnInit {
 
   processarDadosUsuario(resp: any): void {
     this.objeto = this.userService.inicializarUsuario(resp);
-    this.mensagens = this.objeto.usuario?.mensagens_recebidas;
-    this.naoLidas = this.mensagens.filter((mensagem: { status: string; }) => mensagem.status === 'enviado');
     if (!this.objeto.usuario?.confirmed) {
       this.redirecionarParaCadastro();
     } else {
-      switch (this.objeto.usuario?.tipo) {
+      switch (this.objeto.usuario.tipo) {
         case 'aluno':
           // lógica para aluno
           break;
@@ -102,21 +92,4 @@ export class SidebarComponent implements OnInit {
   redirecionarParaLogin(): void {
     this.router.navigateByUrl("/login");
   }
-
-
-  sair(){
-    this.tokenService.excluirToken();
-    this.router.navigateByUrl('')
-  }
-
-  toggleSidebar() {
-    this.collapsed = !this.collapsed;
-  }
-
-  escolherPage(){
-
-  }
-
-  
-  
 }
